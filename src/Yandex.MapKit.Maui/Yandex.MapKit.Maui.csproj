@@ -1,0 +1,47 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <!-- net10.0 carries the platform-independent API (and lets unit tests run without mobile workloads). -->
+    <TargetFrameworks>net10.0</TargetFrameworks>
+    <TargetFrameworks Condition="'$(YandexCoreOnly)' != 'true'">$(TargetFrameworks);net10.0-android</TargetFrameworks>
+    <TargetFrameworks Condition="'$(YandexCoreOnly)' != 'true' and !$([MSBuild]::IsOSPlatform('linux'))">$(TargetFrameworks);net10.0-ios</TargetFrameworks>
+    <YandexPlatform>$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)'))</YandexPlatform>
+    <UseMaui Condition="'$(YandexPlatform)' != ''">true</UseMaui>
+    <RootNamespace>Yandex.MapKit.Maui</RootNamespace>
+
+    <SupportedOSPlatformVersion Condition="'$(YandexPlatform)' == 'android'">26.0</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition="'$(YandexPlatform)' == 'ios'">15.0</SupportedOSPlatformVersion>
+
+    <PackageId>Yandex.MapKit.Maui</PackageId>
+    <Version>0.1.0</Version>
+    <Description>.NET MAUI map control (YandexMapView) built on Yandex MapKit Lite for Android and iOS: pins with custom icons, clustering, polylines, polygons, circles, user location.</Description>
+    <IsTrimmable>true</IsTrimmable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Maui.Controls" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(YandexPlatform)' == 'android'">
+    <ProjectReference Include="..\Yandex.MapKit.Android.Binding\Yandex.MapKit.Android.Binding.csproj" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(YandexPlatform)' == 'ios'">
+    <ProjectReference Include="..\Yandex.MapKit.iOS.Binding\Yandex.MapKit.iOS.Binding.csproj" />
+  </ItemGroup>
+
+  <!-- Platform code lives in Platforms/<Platform>/ and is compiled only for that platform. -->
+  <ItemGroup Condition="'$(YandexPlatform)' != 'android'">
+    <Compile Remove="Platforms\Android\**" />
+    <None Include="Platforms\Android\**" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(YandexPlatform)' != 'ios'">
+    <Compile Remove="Platforms\iOS\**" />
+    <None Include="Platforms\iOS\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="Yandex.MapKit.Maui.Tests" />
+  </ItemGroup>
+
+</Project>

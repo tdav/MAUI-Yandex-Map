@@ -1,0 +1,23 @@
+<metadata>
+  <!-- Internal implementation packages: not part of the public API and a source of generator conflicts. -->
+  <remove-node path="/api/package[contains(@name,'.internal')]" />
+  <remove-node path="/api/package[starts-with(@name,'com.yandex.runtime.sensors')]" />
+
+  <!-- snake_case Java packages → PascalCase namespaces. -->
+  <attr path="/api/package[@name='com.yandex.mapkit.user_location']" name="managedName">Com.Yandex.Mapkit.UserLocation</attr>
+  <attr path="/api/package[@name='com.yandex.mapkit.offline_cache']" name="managedName">Com.Yandex.Mapkit.OfflineCache</attr>
+  <attr path="/api/package[@name='com.yandex.mapkit.road_events']" name="managedName">Com.Yandex.Mapkit.RoadEvents</attr>
+  <attr path="/api/package[@name='com.yandex.mapkit.personalized_poi']" name="managedName">Com.Yandex.Mapkit.PersonalizedPoi</attr>
+  <attr path="/api/package[@name='com.yandex.runtime.ui_view']" name="managedName">Com.Yandex.Runtime.UIView</attr>
+
+  <!-- Animation.getType() would hide object.GetType(). -->
+  <attr path="/api/package[@name='com.yandex.mapkit']/class[@name='Animation']/method[@name='getType']" name="managedName">GetAnimationType</attr>
+
+  <!-- Class com.yandex.mapkit.geometry.Geo collides with namespace Com.Yandex.Mapkit.Geometry.Geo (package geometry.geo). -->
+  <attr path="/api/package[@name='com.yandex.mapkit.geometry']/class[@name='Geo']" name="managedName">GeoUtils</attr>
+
+  <!-- Serialization plumbing: generic Archive.add overloads erase to identical C# signatures. -->
+  <attr path="/api/package[@name='com.yandex.runtime.bindings']/*/method[@name='add' and @jni-signature='(Ljava/lang/Enum;ZLjava/lang/Class;)Ljava/lang/Enum;']" name="managedName">AddEnum</attr>
+  <!-- Per-type ArchivingHandler implementations are used only by the generated serializers. -->
+  <remove-node path="/api/package[@name='com.yandex.runtime.bindings']/class[substring(@name, string-length(@name) - 6) = 'Handler']" />
+</metadata>

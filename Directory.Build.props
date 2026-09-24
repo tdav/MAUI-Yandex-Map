@@ -1,0 +1,23 @@
+<Project>
+  <PropertyGroup>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+
+    <!-- Native SDK version/variant. The variant is a Maven version suffix / pod version suffix. -->
+    <YandexMapKitVersion>4.45.0</YandexMapKitVersion>
+    <YandexMapKitVariant>lite</YandexMapKitVariant>
+
+    <Authors>tdav</Authors>
+    <RepositoryUrl>https://github.com/tdav/MAUI-Yandex-Map</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageProjectUrl>https://github.com/tdav/MAUI-Yandex-Map</PackageProjectUrl>
+    <PackageTags>yandex;mapkit;maps;maui;android;ios</PackageTags>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(IsPackable)' != 'false'">
+    <None Include="$(MSBuildThisFileDirectory)README.md" Pack="true" PackagePath="\" Visible="false" />
+  </ItemGroup>
+</Project>
