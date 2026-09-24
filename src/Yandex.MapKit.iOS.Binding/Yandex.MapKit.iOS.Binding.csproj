@@ -5,7 +5,6 @@
     <SupportedOSPlatformVersion>15.0</SupportedOSPlatformVersion>
     <IsBindingProject>true</IsBindingProject>
     <RootNamespace>YandexMapsMobile</RootNamespace>
-    <NoBindingEmbedding>false</NoBindingEmbedding>
     <NoWarn>$(NoWarn);CS1591</NoWarn>
 
     <PackageId>Yandex.MapKit.Lite.iOS</PackageId>

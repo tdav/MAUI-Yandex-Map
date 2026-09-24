@@ -9,8 +9,6 @@
     <RootNamespace>Yandex.MapKit.Sample</RootNamespace>
     <IsPackable>false</IsPackable>
     <MauiEnableXamlCBindingWithSourceCompilation>true</MauiEnableXamlCBindingWithSourceCompilation>
-    <!-- AndroidX transitive versions of Google Play services are newer than the ones MAUI pins. -->
-    <NoWarn>$(NoWarn);NU1608</NoWarn>
 
     <ApplicationTitle>Yandex Map</ApplicationTitle>
     <ApplicationId>com.tdav.yandexmapkit.sample</ApplicationId>

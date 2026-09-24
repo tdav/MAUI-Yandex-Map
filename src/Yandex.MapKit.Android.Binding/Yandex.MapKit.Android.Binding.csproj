@@ -30,6 +30,18 @@
     <PackageReference Include="Xamarin.AndroidX.Work.Runtime" Version="2.11.2.1" />
   </ItemGroup>
 
+  <!--
+    Google Play services pull AndroidX (Fragment 1.9, Collection 1.6, Lifecycle 2.11, Tracing 2.0) newer than
+    what MAUI pins. Those releases merged the *-ktx artifacts into the main ones, so the old -ktx packages
+    MAUI brings in cause "Type ... is defined multiple times" in D8. Align them here for every consumer.
+  -->
+  <ItemGroup>
+    <PackageReference Include="Xamarin.AndroidX.Fragment.Ktx" Version="1.9.0" />
+    <PackageReference Include="Xamarin.AndroidX.Collection.Ktx" Version="1.6.0.1" />
+    <PackageReference Include="Xamarin.AndroidX.Lifecycle.Process" Version="2.11.0.1" />
+    <PackageReference Include="Xamarin.AndroidX.Tracing.Tracing.Ktx" Version="2.0.2" />
+  </ItemGroup>
+
   <ItemGroup>
     <TransformFile Include="Transforms\Metadata.xml" />
   </ItemGroup>

@@ -137,6 +137,6 @@ docs/design/                        дизайн-документ
 
 - Без Google Play Services геопозиция на Android может не работать (зависимость MapKit).
 - MapKit поддерживает только растровые иконки; SVG из `Resources/Images` MAUI превращает в PNG при сборке.
-- Предупреждения `NU1608` при restore — следствие того, что Google Play Services тянут более новые AndroidX,
-  чем закреплены в MAUI; на работу не влияют.
+- Google Play Services тянут AndroidX новее, чем закреплены в MAUI (Fragment 1.9, Collection 1.6 и т.д.);
+  Android-биндинг явно поднимает устаревшие `*-ktx` пакеты, иначе D8 падает с «Type … is defined multiple times».
 - Windows / Mac Catalyst не поддерживаются (нет MapKit SDK).

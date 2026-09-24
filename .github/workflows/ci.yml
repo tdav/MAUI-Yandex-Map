@@ -58,7 +58,8 @@ jobs:
 
   apple:
     name: iOS (SDK check, binding, sample) + NuGet packages
-    runs-on: macos-15
+    # The .NET 10 iOS workload tracks the newest Xcode; macos-15 images lag behind.
+    runs-on: macos-26
     steps:
       - uses: actions/checkout@v4
       - name: Select latest Xcode

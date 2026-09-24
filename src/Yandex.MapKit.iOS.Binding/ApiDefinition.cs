@@ -48,7 +48,7 @@ interface YMKMapView
     [Export("initWithFrame:")]
     NativeHandle Constructor(CGRect frame);
 
-    /// <param name="vulkanPreferred">Must be <see langword="true"/> on the iOS simulator (no OpenGL on Apple silicon).</param>
+    // vulkanPreferred must be true on the iOS simulator (no OpenGL on Apple silicon).
     [Export("initWithFrame:vulkanPreferred:transparencySupport:")]
     NativeHandle Constructor(CGRect frame, bool vulkanPreferred, bool transparencySupport);
 
