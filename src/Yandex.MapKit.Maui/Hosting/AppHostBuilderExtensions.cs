@@ -34,7 +34,7 @@ public static class AppHostBuilderExtensions
             // Before FinishedLaunching creates the window (and therefore the map handlers).
             events.AddiOS(ios => ios.WillFinishLaunching((_, _) =>
             {
-                YandexMapKitLifecycle.EnsureInitialized();
+                YandexMapKitLifecycle.EnsureInitialized(duringLaunch: true);
                 return true;
             }));
 #endif
