@@ -1,6 +1,7 @@
 namespace Yandex.MapKit.Maui;
 
 /// <summary>A WGS-84 coordinate.</summary>
+[System.ComponentModel.TypeConverter(typeof(GeoPointTypeConverter))]
 public readonly record struct GeoPoint(double Latitude, double Longitude)
 {
     public override string ToString() =>

@@ -4,7 +4,7 @@
     <TargetFramework>net10.0-android</TargetFramework>
     <!-- minSdk of MapKit >= 4.8.0 -->
     <SupportedOSPlatformVersion>26</SupportedOSPlatformVersion>
-    <RootNamespace>Yandex.MapKit.Android</RootNamespace>
+    <RootNamespace>Yandex.MapKit.Bindings.Android</RootNamespace>
     <!-- Java dependency verification (XA4241) reads PackageReference@Version, which CPM leaves empty. -->
     <ManagePackageVersionsCentrally>false</ManagePackageVersionsCentrally>
     <!-- Generated binding code: missing XML docs and obsolete-member warnings are expected. -->
