@@ -4,11 +4,18 @@
 Yandex MapKit **4.45.0-lite**. В репозитории: собственные биндинги нативных SDK, MAUI-контрол
 с API в стиле `Microsoft.Maui.Controls.Maps`, пример приложения и CI.
 
-| Пакет | Что внутри |
+| NuGet-пакет | Что внутри |
 |---|---|
-| `Yandex.MapKit.Maui` | `YandexMapView`, пины, фигуры, кластеризация, `UseYandexMapKit()` |
-| `Yandex.MapKit.Lite.Android` | .NET-биндинг `com.yandex.android:maps.mobile:4.45.0-lite` (namespace `Com.Yandex.Mapkit.*`) |
-| `Yandex.MapKit.Lite.iOS` | .NET-биндинг `YandexMapsMobile.xcframework` (namespace `YandexMapsMobile`, подмножество API карты) |
+| `YandexMapKit.Maui.Community` | `YandexMapView`, пины, фигуры, кластеризация, `UseYandexMapKit()` |
+| `YandexMapKit.Maui.Community.Binding.Android` | .NET-биндинг `com.yandex.android:maps.mobile:4.45.0-lite` (namespace `Com.Yandex.Mapkit.*`) |
+| `YandexMapKit.Maui.Community.Binding.iOS` | .NET-биндинг `YandexMapsMobile.xcframework` (namespace `YandexMapsMobile`, подмножество API карты) |
+
+Неофициальные community-пакеты, не связанные с Яндексом. Биндинги содержат Yandex MapKit SDK,
+его использование регулируется [условиями Yandex Maps API](https://yandex.ru/legal/maps_api/).
+
+```bash
+dotnet add package YandexMapKit.Maui.Community --prerelease
+```
 
 > ⚠️ **Лицензия MapKit.** Бесплатный тариф — только для проектов с открытым доступом, без мониторинга
 > и диспетчеризации, без офлайна; до 25K MAU. Для закрытых/корпоративных приложений нужна коммерческая
@@ -106,6 +113,12 @@ dotnet build samples/Yandex.MapKit.Sample -f net10.0-android -p:YandexMapKitApiK
 
 Ключ для примера можно также задать переменной окружения `YANDEX_MAPKIT_API_KEY` или в файле
 `samples/Yandex.MapKit.Sample/secrets.user.props` (шаблон — `secrets.user.props.example`, файл в `.gitignore`).
+
+## Публикация
+
+Workflow `Publish NuGet` (ручной запуск или тег `v*`) собирает три пакета на macOS и публикует их
+на nuget.org; нужен секрет репозитория `NUGET_API_KEY`. Версии: `VersionPrefix` в проектах +
+`VersionSuffix` (по умолчанию `preview.1`, для стабильного релиза — пустой).
 
 ## Структура
 

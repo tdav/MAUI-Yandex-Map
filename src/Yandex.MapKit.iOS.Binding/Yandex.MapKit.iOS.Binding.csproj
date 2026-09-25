@@ -7,9 +7,9 @@
     <RootNamespace>YandexMapsMobile</RootNamespace>
     <NoWarn>$(NoWarn);CS1591</NoWarn>
 
-    <PackageId>Yandex.MapKit.Lite.iOS</PackageId>
-    <Version>$(YandexMapKitVersion)</Version>
-    <Description>.NET for iOS binding of Yandex MapKit $(YandexMapKitVersion)-$(YandexMapKitVariant) (YandexMapsMobile.xcframework), map subset.</Description>
+    <PackageId>YandexMapKit.Maui.Community.Binding.iOS</PackageId>
+    <VersionPrefix>$(YandexMapKitVersion)</VersionPrefix>
+    <Description>Unofficial community package, not affiliated with or endorsed by Yandex. .NET for iOS binding of Yandex MapKit $(YandexMapKitVersion)-$(YandexMapKitVariant) (YandexMapsMobile.xcframework), map subset. Contains the Yandex MapKit SDK, which is subject to the Yandex Maps API terms: https://yandex.ru/legal/maps_api/</Description>
 
     <YandexNativeDir>$(MSBuildThisFileDirectory)native\</YandexNativeDir>
   </PropertyGroup>

@@ -12,9 +12,9 @@
     <SupportedOSPlatformVersion Condition="'$(YandexPlatform)' == 'android'">26.0</SupportedOSPlatformVersion>
     <SupportedOSPlatformVersion Condition="'$(YandexPlatform)' == 'ios'">15.0</SupportedOSPlatformVersion>
 
-    <PackageId>Yandex.MapKit.Maui</PackageId>
-    <Version>0.1.0</Version>
-    <Description>.NET MAUI map control (YandexMapView) built on Yandex MapKit Lite for Android and iOS: pins with custom icons, clustering, polylines, polygons, circles, user location.</Description>
+    <PackageId>YandexMapKit.Maui.Community</PackageId>
+    <VersionPrefix>0.1.0</VersionPrefix>
+    <Description>Unofficial community package, not affiliated with or endorsed by Yandex. .NET MAUI map control (YandexMapView) built on Yandex MapKit Lite for Android and iOS: pins with custom icons, clustering, polylines, polygons, circles, user location.</Description>
     <IsTrimmable>true</IsTrimmable>
   </PropertyGroup>
 
