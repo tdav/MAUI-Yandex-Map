@@ -9,11 +9,14 @@
     <YandexMapKitVersion>4.45.0</YandexMapKitVersion>
     <YandexMapKitVariant>lite</YandexMapKitVariant>
 
+    <!-- Prerelease until the packages are verified on devices; override with -p:VersionSuffix= for a stable release. -->
+    <VersionSuffix>preview.1</VersionSuffix>
+
     <Authors>tdav</Authors>
     <RepositoryUrl>https://github.com/tdav/MAUI-Yandex-Map</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageProjectUrl>https://github.com/tdav/MAUI-Yandex-Map</PackageProjectUrl>
-    <PackageTags>yandex;mapkit;maps;maui;android;ios</PackageTags>
+    <PackageTags>yandex;mapkit;maps;maui;android;ios;community</PackageTags>
     <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 
