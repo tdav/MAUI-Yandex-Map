@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ym="clr-namespace:Yandex.MapKit.Maui;assembly=Yandex.MapKit.Maui"
+             xmlns:local="clr-namespace:Yandex.MapKit.Sample"
+             x:Class="Yandex.MapKit.Sample.MainPage"
+             x:DataType="local:MainViewModel"
+             NavigationPage.HasNavigationBar="False">
+
+    <Grid>
+        <ym:YandexMapView x:Name="Map"
+                          Center="{Binding Center}"
+                          Zoom="{Binding Zoom}"
+                          ItemsSource="{Binding Places}"
+                          IsClusteringEnabled="{Binding IsClustering}"
+                          ClusterColor="{StaticResource Accent}"
+                          MapLongClicked="OnMapLongClicked"
+                          PinClicked="OnPinClicked">
+            <ym:YandexMapView.ItemTemplate>
+                <DataTemplate x:DataType="local:Place">
+                    <ym:MapPin Location="{Binding Location}"
+                               Label="{Binding Name}"
+                               Icon="landmark.png"
+                               Anchor="0.5,1" />
+                </DataTemplate>
+            </ym:YandexMapView.ItemTemplate>
+        </ym:YandexMapView>
+
+        <!-- Controls stay at the top: the Yandex logo and links in the bottom corners must remain visible. -->
+        <VerticalStackLayout VerticalOptions="Start" Margin="12,48,12,0" Spacing="8">
+            <Border BackgroundColor="#E6FFFFFF" StrokeThickness="0" Padding="12,6" HorizontalOptions="Start">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="12" />
+                </Border.StrokeShape>
+                <Label Text="{Binding Status}" FontSize="12" TextColor="#212121" />
+            </Border>
+            <FlexLayout Wrap="Wrap" AlignItems="Start" JustifyContent="Start">
+                <Button Text="+100 пинов" Clicked="OnAddPinsClicked" Margin="0,0,6,6" />
+                <Button Text="Кластеры" Clicked="OnToggleClusteringClicked" Margin="0,0,6,6" />
+                <Button Text="Фигуры" Clicked="OnAddShapesClicked" Margin="0,0,6,6" />
+                <Button Text="Ночь" Clicked="OnToggleNightClicked" Margin="0,0,6,6" />
+                <Button Text="Я" Clicked="OnMyLocationClicked" Margin="0,0,6,6" />
+                <Button Text="Очистить" Clicked="OnClearClicked" Margin="0,0,6,6" />
+            </FlexLayout>
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

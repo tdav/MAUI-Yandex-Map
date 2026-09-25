@@ -1,0 +1,49 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0-android</TargetFramework>
+    <!-- minSdk of MapKit >= 4.8.0 -->
+    <SupportedOSPlatformVersion>26</SupportedOSPlatformVersion>
+    <RootNamespace>Yandex.MapKit.Bindings.Android</RootNamespace>
+    <!-- Java dependency verification (XA4241) reads PackageReference@Version, which CPM leaves empty. -->
+    <ManagePackageVersionsCentrally>false</ManagePackageVersionsCentrally>
+    <!-- Generated binding code: missing XML docs and obsolete-member warnings are expected. -->
+    <NoWarn>$(NoWarn);CS0108;CS0114;CS0618;CS1591;BG8A00;BG8A04;BG8C00;BG8401;BG8604;BG8605;BG8606;BG8700;BG8800</NoWarn>
+
+    <PackageId>Yandex.MapKit.Lite.Android</PackageId>
+    <Version>$(YandexMapKitVersion)</Version>
+    <Description>.NET for Android binding of Yandex MapKit $(YandexMapKitVersion)-$(YandexMapKitVariant) (com.yandex.android:maps.mobile).</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Downloads the AAR + POM from Maven Central; POM dependencies are verified against the NuGet references below. -->
+    <AndroidMavenLibrary Include="com.yandex.android:maps.mobile" Version="$(YandexMapKitVersion)-$(YandexMapKitVariant)" Bind="true" />
+  </ItemGroup>
+
+  <!-- Transitive dependencies from the maps.mobile POM, satisfied by the official .NET bindings. -->
+  <ItemGroup>
+    <PackageReference Include="Xamarin.GooglePlayServices.Location" Version="121.4.0.1" />
+    <PackageReference Include="Xamarin.Google.Android.Play.Integrity" Version="1.6.0.4" />
+    <PackageReference Include="Xamarin.AndroidX.Annotation" Version="1.10.0.1" />
+    <PackageReference Include="Xamarin.AndroidX.Core" Version="1.19.0.1" />
+    <PackageReference Include="Xamarin.AndroidX.Lifecycle.Common" Version="2.11.0.1" />
+    <PackageReference Include="Xamarin.AndroidX.Work.Runtime" Version="2.11.2.1" />
+  </ItemGroup>
+
+  <!--
+    Google Play services pull AndroidX (Fragment 1.9, Collection 1.6, Lifecycle 2.11, Tracing 2.0) newer than
+    what MAUI pins. Those releases merged the *-ktx artifacts into the main ones, so the old -ktx packages
+    MAUI brings in cause "Type ... is defined multiple times" in D8. Align them here for every consumer.
+  -->
+  <ItemGroup>
+    <PackageReference Include="Xamarin.AndroidX.Fragment.Ktx" Version="1.9.0" />
+    <PackageReference Include="Xamarin.AndroidX.Collection.Ktx" Version="1.6.0.1" />
+    <PackageReference Include="Xamarin.AndroidX.Lifecycle.Process" Version="2.11.0.1" />
+    <PackageReference Include="Xamarin.AndroidX.Tracing.Tracing.Ktx" Version="2.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TransformFile Include="Transforms\Metadata.xml" />
+  </ItemGroup>
+
+</Project>

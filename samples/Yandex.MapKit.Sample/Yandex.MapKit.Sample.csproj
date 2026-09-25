@@ -1,0 +1,55 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net10.0-android</TargetFrameworks>
+    <TargetFrameworks Condition="!$([MSBuild]::IsOSPlatform('linux'))">$(TargetFrameworks);net10.0-ios</TargetFrameworks>
+    <OutputType>Exe</OutputType>
+    <UseMaui>true</UseMaui>
+    <SingleProject>true</SingleProject>
+    <RootNamespace>Yandex.MapKit.Sample</RootNamespace>
+    <IsPackable>false</IsPackable>
+    <MauiEnableXamlCBindingWithSourceCompilation>true</MauiEnableXamlCBindingWithSourceCompilation>
+
+    <ApplicationTitle>Yandex Map</ApplicationTitle>
+    <ApplicationId>com.tdav.yandexmapkit.sample</ApplicationId>
+    <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+    <ApplicationVersion>1</ApplicationVersion>
+
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">26.0</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">15.0</SupportedOSPlatformVersion>
+    <!-- 64-bit only: smaller APK, MapKit ships 4 ABIs. -->
+    <RuntimeIdentifiers Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">android-arm64;android-x64</RuntimeIdentifiers>
+  </PropertyGroup>
+
+  <!--
+    MapKit API key: never commit it. Pass it as -p:YandexMapKitApiKey=..., via the YANDEX_MAPKIT_API_KEY
+    environment variable, or in a git-ignored secrets.user.props next to this file.
+  -->
+  <Import Project="secrets.user.props" Condition="Exists('secrets.user.props')" />
+  <PropertyGroup>
+    <YandexMapKitApiKey Condition="'$(YandexMapKitApiKey)' == ''">$(YANDEX_MAPKIT_API_KEY)</YandexMapKitApiKey>
+  </PropertyGroup>
+  <ItemGroup>
+    <AssemblyMetadata Include="YandexMapKitApiKey" Value="$(YandexMapKitApiKey)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <MauiIcon Include="Resources\AppIcon\appicon.svg" Color="#FC3F1D" />
+    <MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#FC3F1D" BaseSize="128,128" />
+    <MauiImage Include="Resources\Images\*" />
+  </ItemGroup>
+
+  <ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">
+    <BundleResource Include="Platforms\iOS\PrivacyInfo.xcprivacy" LogicalName="PrivacyInfo.xcprivacy" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Maui.Controls" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Yandex.MapKit.Maui\Yandex.MapKit.Maui.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,44 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0-ios</TargetFramework>
+    <SupportedOSPlatformVersion>15.0</SupportedOSPlatformVersion>
+    <IsBindingProject>true</IsBindingProject>
+    <RootNamespace>YandexMapsMobile</RootNamespace>
+    <NoWarn>$(NoWarn);CS1591</NoWarn>
+
+    <PackageId>Yandex.MapKit.Lite.iOS</PackageId>
+    <Version>$(YandexMapKitVersion)</Version>
+    <Description>.NET for iOS binding of Yandex MapKit $(YandexMapKitVersion)-$(YandexMapKitVariant) (YandexMapsMobile.xcframework), map subset.</Description>
+
+    <YandexNativeDir>$(MSBuildThisFileDirectory)native\</YandexNativeDir>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ObjcBindingApiDefinition Include="ApiDefinition.cs" />
+    <ObjcBindingCoreSource Include="StructsAndEnums.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Static framework with a C++ core: force-load all symbols (ObjC categories) and link libc++. -->
+    <NativeReference Include="$(YandexNativeDir)YandexMapsMobile.xcframework">
+      <Kind>Framework</Kind>
+      <ForceLoad>True</ForceLoad>
+      <IsCxx>True</IsCxx>
+      <SmartLink>False</SmartLink>
+      <Frameworks>CoreFoundation Foundation CoreLocation UIKit OpenGLES SystemConfiguration CoreGraphics QuartzCore Security CoreTelephony CoreMotion DeviceCheck NetworkExtension</Frameworks>
+      <LinkerFlags>-ObjC -lresolv -lc++</LinkerFlags>
+    </NativeReference>
+
+    <!-- SDK resources (podspec "resources"): copied into the app bundle as YandexMapsMobile.bundle. -->
+    <BundleResource Include="$(YandexNativeDir)YandexMapsMobile.bundle\**\*">
+      <LogicalName>YandexMapsMobile.bundle/%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
+    </BundleResource>
+  </ItemGroup>
+
+  <Target Name="YandexCheckNativeSdk" BeforeTargets="BeforeBuild">
+    <Error Condition="!Exists('$(YandexNativeDir)YandexMapsMobile.xcframework')"
+           Text="Yandex MapKit iOS SDK not found in $(YandexNativeDir). Run tools/fetch-ios-sdk.sh first." />
+  </Target>
+
+</Project>
