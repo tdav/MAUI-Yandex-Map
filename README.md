@@ -88,10 +88,15 @@ dotnet add package YandexMapKit.Maui.Community --prerelease
    - iOS: `NSLocationWhenInUseUsageDescription` в `Info.plist`.
 
 5. iOS: добавьте `Platforms/iOS/PrivacyInfo.xcprivacy` (см. пример) — без него App Store отклонит сборку.
+   При сборке с Xcode 27 подключите жизненный цикл UIKit Scenes в приложении. Пример настройки есть в
+   [SceneDelegate.cs](samples/Yandex.MapKit.Sample/Platforms/iOS/SceneDelegate.cs) и
+   [Info.plist](samples/Yandex.MapKit.Sample/Platforms/iOS/Info.plist).
 
 ## Сборка из исходников
 
 Требования: .NET 10 SDK, workload'ы `maui-android` / `maui` (iOS — только на macOS с актуальным Xcode).
+Для Xcode 27.2 проверена сборка с .NET SDK 10.0.404 и набором workload 10.0.404
+(`dotnet workload install maui --version 10.0.404`).
 
 ```bash
 dotnet workload install maui-android            # или: maui (Android + iOS) на macOS
@@ -103,6 +108,7 @@ dotnet build src/Yandex.MapKit.Android.Binding
 tools/fetch-ios-sdk.sh
 python3 tools/verify-ios-selectors.py            # сверка селекторов биндинга с заголовками SDK
 dotnet build src/Yandex.MapKit.iOS.Binding
+dotnet build samples/Yandex.MapKit.Sample -f net10.0-ios -p:RuntimeIdentifier=iossimulator-arm64
 
 # Тесты (без мобильных workload'ов)
 dotnet test tests/Yandex.MapKit.Maui.Tests -p:YandexCoreOnly=true
